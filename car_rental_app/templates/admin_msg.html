@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Create Car {% endblock %}
+
+{% block search %}
+{% endblock %}
+{% block nav %}
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Car List</a></li>
+        <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Order List</a></li>
+        <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Message</a></li>
+         <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Add Car</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
+      </ul>
+    </div>
+
+{% endblock %}
+{% block body %}
+<div class='container table-responsive'>
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><h5><strong><span class="glyphicon glyphicon-list"></span> All Mail List</strong></h5> </div>
+    <div class="panel-body">
+  <!-- Table -->
+
+  <table class="table table-bordered table-striped table-hover">
+
+   <tr>
+    <td><strong>Sender Name</strong></td>
+    <td><strong>Sender Mail</strong></td>
+    <td><strong>Message</strong></td>
+    <td><strong>Actions</strong></td>
+  </tr>
+
+      <tbody>
+      {% for ob in car %}
+
+    <tr>
+    <td>{{ob.name}}</td>
+    <td>{{ob.email}}</td>
+    <td>{{ob.message}}</td>
+
+    <td>
+
+         <a href="{% url 'msg_delete' ob.id %}"><button type="button" class="btn btn-danger" onclick="return getConfirmation()"><span class="glyphicon glyphicon-trash"></span></button></a>
+
+    </td>
+    </tr>
+    {% endfor %}
+</tbody>
+  </table>
+
+<nav>
+  <ul class="pager">
+    <li class="previous">{% if car.has_previous %}
+            <a href="?page={{ movie.previous_page_number }}" style="background-color:#1aa3ff !important; color: white !important;"><span aria-hidden="true">&larr;</span> Previous</a>
+    {% endif %}
+    </li>
+      <li class="previous" style="color: black !important;">
+          Page {{ car.number }} of {{ car.paginator.num_pages }}.
+
+    </li>
+    <li class="next">{% if car.has_next %}
+            <a href="?page={{ movie.next_page_number }}" style="background-color:#1aa3ff !important; color: white !important;">
+        Next <span aria-hidden="true">&rarr;</span></a>{% endif %}</li>
+  </ul>
+</nav>
+        <hr>
+
+</div>
+
+</div>
+
+
+
+</div> <!--end container-->
+{% endblock %}

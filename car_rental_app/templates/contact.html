@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Contact Us {% endblock %}
+
+{% block search %}
+
+{% endblock %}
+{% block nav %}
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> New Added Car</a></li>
+        <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Popular Car</a></li>
+        <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-user"></span> Logout</a></li>
+      </ul>
+    </div>
+{% endblock %}
+{% block body %}
+<div class ='col-sm-5 col-sm-offset-3'>
+    <h1>{{ title }}</h1><hr>
+
+    <form method="POST" action="">{% csrf_token %}
+      {{form|crispy}}
+        <div class="pull-right">
+            <input type="submit" class="btn btn-primary" value="Send"/>
+        </div>
+
+</form>
+</div>
+{% endblock %}

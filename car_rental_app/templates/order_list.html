@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %} List Order {% endblock %}
+{% block search %}
+{% endblock %}
+{% block nav %}
+
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{% url 'adminIndex' %}"><span class="glyphicon glyphicon-home"></span> Car List</a></li>
+        <li><a href="{% url 'order_list' %}"><span class="glyphicon glyphicon-tags"></span> Order List</a></li>
+        <li><a href="{% url 'message' %}"><span class="glyphicon glyphicon-envelope"></span> Message</a></li>
+        <li><a href="{% url 'car_create' %}"><span class="glyphicon glyphicon-plus"></span> Add Car</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
+      </ul>
+    </div>
+
+{% endblock %}
+{% block body %}
+<div class='container table-responsive'>
+<div class="panel panel-primary">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><strong><span class="glyphicon glyphicon-list"></span> All Order List</strong> </div>
+    <div class="panel-body">
+    <strong class="navbar-form navbar-left" style="color: #5f5f5f;"><span class="glyphicon glyphicon-cog"></span> 25 Order Display Per Page </strong>
+    {% block search_box %}
+      <form method="GET" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Order Search" value="{{request.GET.q}}" name="q">
+        </div>
+        <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Search</button>
+      </form>
+      {% endblock %}
+
+  <!-- Table -->
+  <table class="table table-bordered table-striped table-hover">
+   <tr>
+     <td><strong>Order ID</strong></td>
+   <td><strong>Employee Name</strong></td>
+   <td><strong>Phone No</strong></td>
+    <td><strong>Car Name</strong></td>
+    <td><strong>From</strong></td>
+    <td><strong>To</strong></td>
+    <td><strong>Action</strong></td>
+  </tr>
+
+      {% for ob in order %}
+    <tr>
+    <td>{{ob.id}} ORD</td>
+    <td>{{ob.employee_name}}</td>
+    <td>{{ob.cell_no}}</td>
+    <td>{{ob.car_name}}</td>
+    <td>{{ob.date}}</td>
+    <td>{{ob.to}}</td>
+    <td>
+
+         <a href="{% url 'order_detail' ob.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-eye-open"></span></button></a>
+         <a href="{% url 'order_delete' ob.id %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></button></a>
+
+    </td>
+</tr>
+    {% endfor %}
+
+  </table>
+
+
+
+<nav>
+  <ul class="pager">
+    <li class="previous">{% if order.has_previous %}
+            <a href="?page={{ order.previous_page_number }}" style="background-color:#1aa3ff !important; color: white !important;"><span aria-hidden="true">&larr;</span> Previous</a>
+    {% endif %}
+    </li>
+      <li class="previous">
+         <strong> Page {{ order.number }} of {{ order.paginator.num_pages }}.</strong>
+
+    </li>
+    <li class="next">{% if order.has_next %}
+            <a href="?page={{ order.next_page_number }}" style="background-color:#1aa3ff !important; color: white !important;">
+        Next <span aria-hidden="true">&rarr;</span></a>{% endif %}</li>
+  </ul>
+</nav>
+    <hr>
+
+    </div>
+    </div>
+{% endblock %}

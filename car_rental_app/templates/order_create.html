@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Create Order {% endblock %}
+
+{% block search_box %}
+
+{% endblock %}
+{% block nav %}
+        <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Newly Added Car</a></li>
+        <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Popular car</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
+{% endblock %}
+{% block body %}
+
+<div class ='col-sm-6 col-sm-offset-3'>
+<div class="panel panel-primary">
+<p class="list-group-item active">
+    <strong><span class="glyphicon glyphicon-tag"></span> Book Your Car</strong>
+  </p><br>
+<form method="POST" action="" >{% csrf_token %}
+
+      {{form|crispy}}
+</div>
+    </div>
+  <div class="form-group row">
+    <div class="col-sm-offset-3 col-sm-10">
+      <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-ok"></span> Book</button>
+    </div>
+  </div>
+</form>
+
+
+{% endblock %}

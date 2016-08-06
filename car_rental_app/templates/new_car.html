@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block title %}  Newly Added car {% endblock %}
+
+
+{% block nav %}
+        <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Newly Added Car</a></li>
+        <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Popular car</a></li>
+        <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Logout {{request.user.username}}</a></li>
+{% endblock %}
+{% block body %}
+<div class="container" style="margin-top: 15px;">
+<div class="row">
+        {% for ob in car %}
+
+      <div class="col-sm-6 col-md-3">
+        <div class="thumbnail">
+            {% if ob.image %}
+                <img src='{{ ob.image.url }}' class="img-responsive"/>
+            {% endif %}
+          <div class="caption">
+            <strong>{{ ob.car_name }}</strong>
+            <p> Company Name: {{ ob.company_name }}<br>
+                Num Of Seats: {{ ob.num_of_seats }}<br>
+                Cost Per Day: {{ ob.cost_par_day }} Taka<br>
+            </p>
+              <div class="pull-right">
+            <p>
+                <a href="{% url 'like' ob.id %}" class="btn btn-success" role="button"><span class="glyphicon glyphicon-thumbs-up"></span></a>
+                <a href="{% url 'car_detail' ob.id %}" class="btn btn-primary" role="button">Detail</a>
+                <a href="{% url 'order_create' %}" class="btn btn-danger" role="button">Book</a></p>
+              </div>
+          </div>
+        </div>
+      </div>
+
+
+        {% endfor %}
+</div>
+
+    <nav>
+  <ul class="pager">
+    <li class="previous">{% if car.has_previous %}
+            <a href="?page={{ car.previous_page_number }}" style="background-color:#1aa3ff !important; color: white !important;"><span aria-hidden="true">&larr;</span> Previous</a>
+    {% endif %}
+    </li>
+      <li class="previous" style="color: black !important;">
+          Page {{ car.number }} of {{ car.paginator.num_pages }}.
+
+    </li>
+    <li class="next">{% if movie.has_next %}
+            <a href="?page={{ car.next_page_number }}" style="background-color:#1aa3ff !important; color: white !important;">
+        Next <span aria-hidden="true">&rarr;</span></a>{% endif %}</li>
+  </ul>
+</nav>
+        <hr>
+</div>
+
+
+
+{% endblock %}

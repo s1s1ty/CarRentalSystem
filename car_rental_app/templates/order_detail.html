@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block title %} Order Detail {% endblock %}
+
+{% block body %}
+
+
+<div class ='col-sm-6 col-sm-offset-3'>
+  <strong><p style="color: red">Your booking was successfully.We will contact you soon regarding your booking.Your booking details are as bellow
+  </p></strong>
+  <p class="list-group-item active">
+    <strong><span class="glyphicon glyphicon-tag"></span> Booking Detail</strong>
+  </p>
+   <a href="" class="list-group-item"><strong>Car name: </strong>{{detail.car_name}}</a>
+  <a href="" class="list-group-item"><strong>Employee name: </strong>{{detail.employee_name}}</a>
+  <a href="" class="list-group-item"><strong>Phone No: </strong>{{detail.cell_no}}</a>
+  <a href="" class="list-group-item"><strong>Address: </strong>{{detail.address}}</a>
+  <a href="" class="list-group-item"><strong>From: </strong>{{detail.date}}</a>
+  <a href="" class="list-group-item"><strong>To: </strong>{{detail.to}}</a>
+  <a href="" class="list-group-item"><strong>Order Id: </strong>{{detail.id}}</a><br>
+  <div class="pull-right">
+    <a href="{% url 'order_edit' detail.id %}"><button type="button" class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span> Edit Booking</button></a>
+    <a href="{% url 'order_delete' detail.id %}"><button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-pencil"></span> Cancel Booking</button></a>
+    <a href=""><button type="button" class="btn btn-warning"><span class="glyphicon glyphicon-pencil"></span> Print</button></a>
+
+  </div>
+</div>
+
+{% endblock %}

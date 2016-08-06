@@ -1,0 +1,66 @@
+{% load staticfiles %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %} Car Rental System {% endblock %}</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<body>
+
+<nav class="navbar navbar-custom navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="glyphicon glyphicon-align-justify"></span>
+
+      </button>
+      <div class="navbar-brand"><span class="glyphicon glyphicon-fire"></span> Car Rental</div>
+
+
+    </div>
+
+      <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+         <li>
+             {% block search %}
+            <!-- search box-->
+
+      <form method="GET" class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Car Search" value="{{request.GET.q}}" name="q">
+        </div>
+        <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span> Search</button>
+      </form>
+    {% endblock %}
+
+{% block nav %}
+        <li><a href="{% url 'newcar' %}"><span class="glyphicon glyphicon-align-justify"></span> Newly Added Car</a></li>
+        <li><a href="{% url 'popularcar' %}"><span class="glyphicon glyphicon-star"></span> Popular car</a></li>
+        <li><a href="{% url 'contact' %}"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
+        <li><a href="{% url 'logout' %}"><span class="glyphicon glyphicon-share"></span> Logout</a></li>
+{% endblock %}
+      </ul>
+    </div>
+
+
+  </div>
+</nav>
+
+
+{% block body %}
+<div class="container">
+
+</div>
+{% endblock %}
+</body>
+</html>

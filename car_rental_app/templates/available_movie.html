@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}  Movie List {% endblock %}
+
+{% block delete_confirm %}
+        <script type="text/javascript">
+         <!--
+            function getConfirmation(){
+               var retVal = confirm("Do you want to Delete ?");
+                if(retVal) return true;
+                else return false;
+            }
+         //-->
+      </script>
+    {% endblock %}
+
+{% block body %}
+<div class='container'>
+    <div class ='col-sm-6 col-sm-offset-3'>
+    <from>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">From</span>
+            <input type="date" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+        </div>
+         <div class="input-group">
+              <span class="input-group-addon" id="basic-addon1">To</span>
+              <input type="date" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+         </div>
+
+       <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-search"></span> Show Movie</button>
+
+    </from>
+    </div>
+
+
+
+</div> <!--end container-->
+{% endblock %}
